@@ -1,0 +1,133 @@
+Invoked as: ./configure --prefix=/home/codio/sqlite
+Tclsh: /usr/bin/tclsh
+Failed: cc conftest__.c -o conftest__
+/tmp/ccyJDACj.o: In function `main':
+conftest__.c:(.text+0x5): undefined reference to `localtime_s'
+collect2: error: ld returned 1 exit status
+child process exited abnormally
+============
+The failed code was:
+extern void localtime_s(void);
+int main(void) {
+localtime_s();
+return 0;
+}
+============
+Failed: cc conftest__.c -o conftest__
+/tmp/cclTBHXY.o: In function `main':
+conftest__.c:(.text+0x5): undefined reference to `deflate'
+collect2: error: ld returned 1 exit status
+child process exited abnormally
+============
+The failed code was:
+extern void deflate(void);
+int main(void) {
+deflate();
+return 0;
+}
+============
+Failed: cc -c -rpath /home/codio/sqlite/lib conftest__.c -o conftest__.o
+cc: error: /home/codio/sqlite/lib: No such file or directory
+cc: error: unrecognized command line option ‘-rpath’
+child process exited abnormally
+============
+The failed code was:
+int main(void) {
+
+return 0;
+}
+============
+Failed: cc -O2 -g conftest__.c -o conftest__
+/tmp/cc5l0sV6.o: In function `main':
+/home/codio/workspace/sqlite-autoconf-3490100/conftest__.c:3: undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+child process exited abnormally
+============
+The failed code was:
+extern void pthread_create(void);
+int main(void) {
+pthread_create();
+return 0;
+}
+============
+Failed: cc -O2 -g conftest__.c -o conftest__
+/tmp/ccVlksKd.o: In function `main':
+/home/codio/workspace/sqlite-autoconf-3490100/conftest__.c:3: undefined reference to `pthread_mutexattr_init'
+collect2: error: ld returned 1 exit status
+child process exited abnormally
+============
+The failed code was:
+extern void pthread_mutexattr_init(void);
+int main(void) {
+pthread_mutexattr_init();
+return 0;
+}
+============
+Failed: cc -O2 -g conftest__.c -o conftest__
+/tmp/ccpEupTl.o: In function `main':
+/home/codio/workspace/sqlite-autoconf-3490100/conftest__.c:3: undefined reference to `tgetent'
+collect2: error: ld returned 1 exit status
+child process exited abnormally
+============
+The failed code was:
+extern void tgetent(void);
+int main(void) {
+tgetent();
+return 0;
+}
+============
+Failed: cc -O2 -g conftest__.c -o conftest__ -lreadline
+/tmp/ccacvrSg.o: In function `main':
+/home/codio/workspace/sqlite-autoconf-3490100/conftest__.c:3: undefined reference to `tgetent'
+collect2: error: ld returned 1 exit status
+child process exited abnormally
+============
+The failed code was:
+extern void tgetent(void);
+int main(void) {
+tgetent();
+return 0;
+}
+============
+Failed: cc -O2 -g conftest__.c -o conftest__ -lncurses
+/tmp/cc2okdzo.o: In function `main':
+/home/codio/workspace/sqlite-autoconf-3490100/conftest__.c:3: undefined reference to `readline'
+collect2: error: ld returned 1 exit status
+child process exited abnormally
+============
+The failed code was:
+extern void readline(void);
+int main(void) {
+readline();
+return 0;
+}
+============
+Failed: cc -O2 -g conftest__.c -o conftest__
+/tmp/ccSvKrCB.o: In function `main':
+/home/codio/workspace/sqlite-autoconf-3490100/conftest__.c:3: undefined reference to `dlopen'
+collect2: error: ld returned 1 exit status
+child process exited abnormally
+============
+The failed code was:
+extern void dlopen(void);
+int main(void) {
+dlopen();
+return 0;
+}
+============
+Failed: cc -O2 -g conftest__.c -o conftest__
+conftest__.c:1:13: warning: conflicting types for built-in function ‘ceil’ [-Wbuiltin-declaration-mismatch]
+ extern void ceil(void);
+             ^~~~
+/tmp/ccMei9NL.o: In function `main':
+/home/codio/workspace/sqlite-autoconf-3490100/conftest__.c:3: undefined reference to `ceil'
+collect2: error: ld returned 1 exit status
+child process exited abnormally
+============
+The failed code was:
+extern void ceil(void);
+int main(void) {
+ceil();
+return 0;
+}
+============
