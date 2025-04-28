@@ -27,7 +27,7 @@ class Command(BaseCommand):
         max_col_num = sheet.max_column
         print(f'Rows: {max_row_num}, Columns: {max_col_num}')
 
-        price = 5
+        
         finish = 0
         
         for i in range(2, max_row_num + 1):
@@ -42,6 +42,8 @@ class Command(BaseCommand):
                 year = row_data[6]
                 reclat = row_data[7]
                 reclong = row_data[8]
+
+                price = 5
 
                 if fall == 'Fell':
                     price += 5

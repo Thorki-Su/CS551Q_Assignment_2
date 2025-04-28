@@ -4,12 +4,29 @@
 {% endblock %}
 <!-- This is the detail page. All information about the meteorite will be shown. -->
 {% block content %}
-    <p>Name: {{ meteorite.name }}</p>
-    <p>Id: {{ meteorite.id }}</p>
-    <p>Type: {{ meteorite.nametype }}, {{ meteorite.recclass }}, {{ meteorite.fall }}</p>
-    <p>Mass: {{ meteorite.mass }}g</p>
-    <p>Year: {{ meteorite.year }}</p>
-    <p>Location: ({{ meteorite.latitude }}, {{ meteorite.longitude }})</p>
-    <!-- Here will be a little map to show the location. -->
-    <p>Price: {{ meteorite.price }}£</p>
+    <div id="detailPage">
+        <div id="meteorite_info">
+            <p>Name: {{ meteorite.name }}</p>
+            <p>Id: {{ meteorite.id }}</p>
+            <p>Type: {{ meteorite.nametype }}, {{ meteorite.recclass }}, {{ meteorite.fall }}</p>
+            <p>Mass: {{ meteorite.mass }}g</p>
+            <p>Year: {{ meteorite.year }}</p>
+            <p>Location: ({{ meteorite.latitude }}, {{ meteorite.longitude }})</p>
+            <!-- Here will be a little map to show the location. -->
+            <!-- <p>Price: {{ meteorite.price }}£</p> -->
+        </div>
+
+        <div id="buying_info">
+            <h1>[Meteorite Adoption] -- {{ meteorite.name }} -- {{ meteorite.id }}</h1>
+            <p>price: <strong><span>£{{ meteorite.price }}</span></strong></p>
+            <div id="saveAndBuy">
+                <button>Add into Basket</button>
+                <button>Buy</button>
+            </div>
+            <div id="markAndCompare">
+                <button>Set a Marked Meteorite</button>
+                <button>Compare with Marked</button>
+            </div>
+        </div>
+    </div>
 {% endblock %}

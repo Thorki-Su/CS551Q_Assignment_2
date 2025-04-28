@@ -5,4 +5,5 @@ app_name = 'user'
 
 urlpatterns = [
     path('', views.personal, name='user_info'),
+    path('feedback', views.feedback, name='feedback'),
 ]

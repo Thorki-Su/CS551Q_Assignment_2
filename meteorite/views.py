@@ -1,9 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Meteorite
+import random
 
 # Create your views here.
 def homepage(request):
-    return render(request,'meteorite/homepage.html')
+    meteorites = Meteorite.objects.all()
+    random_meteorites = random.sample(list(meteorites), 10)
+    context = {
+        'random_meteorites': random_meteorites,
+    }
+    return render(request,'meteorite/homepage.html', context=context)
 
 def meteorite_list(request):
     meteorites = Meteorite.objects.all()
