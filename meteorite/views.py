@@ -1,6 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Meteorite
 import random
+from django.core.paginator import Paginator
+from faker import Faker
+
+fake = Faker()
 
 # Create your views here.
 def homepage(request):
@@ -12,17 +16,105 @@ def homepage(request):
     return render(request,'meteorite/homepage.html', context=context)
 
 def meteorite_list(request):
-    meteorites = Meteorite.objects.all()
+    search_query = request.GET.get('search', '')
+    meteorites = Meteorite.objects.all().order_by('id')
+    sort_by = request.GET.get('sort', '')
+    fall_filter = request.GET.get('fall', '')
+    nametype_filter = request.GET.get('nametype', '')
+    year_filter = request.GET.get('year', '')
+    mass_filter = request.GET.get('mass', '')
+    #search
+    if search_query:
+        meteorites = meteorites.filter(name__icontains=search_query)
+    #sort
+    if sort_by == 'mass_asc':
+        meteorites = meteorites.order_by('mass')
+    elif sort_by == 'mass_desc':
+        meteorites = meteorites.order_by('-mass')
+    elif sort_by == 'name_asc':
+        meteorites = meteorites.order_by('name')
+    elif sort_by == 'name_desc':
+        meteorites = meteorites.order_by('-name')
+    elif sort_by == 'id_asc':
+        meteorites = meteorites.order_by('id')
+    elif sort_by == 'id_desc':
+        meteorites = meteorites.order_by('-id')
+    else:
+        meteorites = meteorites.order_by('id')
+    #filter
+    #by fall
+    if fall_filter:
+        meteorites = meteorites.filter(fall=fall_filter)
+    #by nametype
+    if nametype_filter:
+        meteorites = meteorites.filter(nametype=nametype_filter)
+    #by year
+    if year_filter == 'before_2000':
+        meteorites = meteorites.filter(year__lte=1999)
+    elif year_filter == 'after_2000':
+        meteorites = meteorites.filter(year__gte=2000)
+    #by mass
+    if mass_filter == 'small':
+        meteorites = meteorites.filter(mass__lte=100)
+    elif mass_filter == 'medium':
+        meteorites = meteorites.filter(mass__gt=100, mass__lte=1000)
+    elif mass_filter == 'large':
+        meteorites = meteorites.filter(mass__gt=1000)
+    #page
+    paginator = Paginator(meteorites, 50)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        'meteorites': meteorites,
+        'page_obj': page_obj,
+        'search_query': search_query,
+        'fall_filter': fall_filter,
+        'sort_by': sort_by,
     }
     return render(request,'meteorite/list.html', context=context)
 
 def meteorite_detail(request, meteorite_id):
     meteorite = get_object_or_404(Meteorite, id=meteorite_id)
-    # meteorites = Meteorite.objects.all()
+    #get similar meteorites
+    similar_meteorites = Meteorite.objects.filter(
+        recclass=meteorite.recclass
+    ).exclude(id=meteorite.id)[:5]
+    #get story for fell-meteorite
+    background_story = None
+    background_story = generate_meteorite_story(meteorite)
     context = {
         'meteorite': meteorite,
-        # 'meteorites': meteorites,
+        'similar_meteorites': similar_meteorites,
+        'background_story': background_story,
     }
     return render(request,'meteorite/detail.html', context=context)
+
+def generate_meteorite_story(meteorite):
+    seasons = ['spring', 'summer', 'autumn', 'winter']
+    witnesses = ['farmer', 'shepherd', 'traveler', 'villager', 'hunter']
+    legends = [
+        'the guardian of the village',
+        'a miracle for scientific research',
+        'a legend passed down for generations',
+        'a treasure in the museum',
+        'the hero story of local children'
+    ]
+
+    year = meteorite.year
+    season = random.choice(seasons)
+    location = fake.city()
+    witness = random.choice(witnesses)
+    legend = random.choice(legends)
+    name = fake.name()
+    job = fake.job()
+    if meteorite.fall == "Fell":
+        story = (
+            f"In the {season} of {year}, a dazzling light streaked across the sky over {location}. "
+            f"The meteorite \"{meteorite.name}\" descended and was witnessed by a {witness}. "
+            f"Since then, it has become known as {legend}."
+        )
+    else:
+        story = (
+            f"In the {season} of {year}, the meteorite \"{meteorite.name}\" was found in {location}."
+            f"A {job} named {name} found it, and then sent it to laboratory."
+        )
+    return story

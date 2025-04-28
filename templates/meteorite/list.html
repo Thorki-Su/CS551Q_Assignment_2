@@ -2,14 +2,68 @@
 {% block title %}Meteorite List{% endblock %}
 <!-- This is the list page. All meteorites will be shown. And user can search any or use the filter and sorter. -->
 {% block content %}
+    <form method="get" action="" style="margin-top:10px;">
+        <input type="text" name="search" placeholder="Search by name" value="{{ search_query }}">
+
+        <select name="sort">
+            <option value="">Sort by</option>
+            <option value="mass_asc" {% if sort_by == 'mass_asc' %}selected{% endif %}>Mass Ascending</option>
+            <option value="mass_desc" {% if sort_by == 'mass_desc' %}selected{% endif %}>Mass Descending</option>
+            <option value="name_asc" {% if sort_by == 'name_asc' %}selected{% endif %}>Name Ascending</option>
+            <option value="name_desc" {% if sort_by == 'name_desc' %}selected{% endif %}>Name Descending</option>
+            <option value="id_asc" {% if sort_by == 'id_asc' %}selected{% endif %}>ID Ascending</option>
+            <option value="id_desc" {% if sort_by == 'id_desc' %}selected{% endif %}>ID Descending</option>
+        </select>
+
+        <select name="fall">
+            <option value="">All</option>
+            <option value="Fell" {% if request.GET.fall == "Fell" %}selected{% endif %}>Fell</option>
+            <option value="Found" {% if request.GET.fall == "Found" %}selected{% endif %}>Found</option>
+        </select>
+
+        <select name="nametype">
+            <option value="">All Name Types</option>
+            <option value="Valid" {% if request.GET.nametype == "Valid" %}selected{% endif %}>Valid</option>
+            <option value="Relict" {% if request.GET.nametype == "Relict" %}selected{% endif %}>Relict</option>
+        </select>
+
+        <select name="year">
+            <option value="">All Years</option>
+            <option value="before_2000" {% if request.GET.year == "before_2000" %}selected{% endif %}>Before 2000</option>
+            <option value="after_2000" {% if request.GET.year == "after_2000" %}selected{% endif %}>2000 and After</option>
+        </select>
+
+        <select name="mass">
+            <option value="">All Masses</option>
+            <option value="small" {% if request.GET.mass == "small" %}selected{% endif %}>≤100g</option>
+            <option value="medium" {% if request.GET.mass == "medium" %}selected{% endif %}>100g-1000g</option>
+            <option value="large" {% if request.GET.mass == "large" %}selected{% endif %}>>1000g</option>
+        </select>
+
+        <button type="submit">Apply</button>
+    </form>
     <h3>Meteorite List</h3>
-        <ul>
-            {% for meteorite in meteorites %}
-                <li class="list_item">
-                    <a href="{% url 'meteorite:meteorite_detail' meteorite.id %}">
-                        {{ meteorite.name }} [{{ meteorite.id }}]
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
+    <ul>
+        {% for meteorite in page_obj %}
+            <li class="list_item">
+                <a href="{% url 'meteorite:meteorite_detail' meteorite.id %}">
+                    {{ meteorite.name }} [{{ meteorite.id }}]
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page=1">First</a>
+            <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.next_page_number }}">Next</a>
+            <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+    </div>
 {% endblock %}

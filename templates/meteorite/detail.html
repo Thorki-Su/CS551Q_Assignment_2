@@ -6,27 +6,78 @@
 {% block content %}
     <div id="detailPage">
         <div id="meteorite_info">
-            <p>Name: {{ meteorite.name }}</p>
-            <p>Id: {{ meteorite.id }}</p>
-            <p>Type: {{ meteorite.nametype }}, {{ meteorite.recclass }}, {{ meteorite.fall }}</p>
-            <p>Mass: {{ meteorite.mass }}g</p>
-            <p>Year: {{ meteorite.year }}</p>
-            <p>Location: ({{ meteorite.latitude }}, {{ meteorite.longitude }})</p>
+            <div style="background-color:gray; color:white; text-align: center; padding:5px;">
+                <strong><span>Meteorite Information</span></strong>
+            </div>
+            <p><strong>Name:</strong> {{ meteorite.name }}</p>
+            <p><strong>Id:</strong> {{ meteorite.id }}</p>
+            <p><strong>Type:</strong> {{ meteorite.nametype }}, {{ meteorite.recclass }}, {{ meteorite.fall }}</p>
+            <p><strong>Mass:</strong> {{ meteorite.mass }}g</p>
+            <p><strong>Year:</strong> {{ meteorite.year }}</p>
+            <p><strong>Location:</strong> ({{ meteorite.latitude }}, {{ meteorite.longitude }})</p>
             <!-- Here will be a little map to show the location. -->
-            <!-- <p>Price: {{ meteorite.price }}£</p> -->
         </div>
 
         <div id="buying_info">
-            <h1>[Meteorite Adoption] -- {{ meteorite.name }} -- {{ meteorite.id }}</h1>
-            <p>price: <strong><span>£{{ meteorite.price }}</span></strong></p>
+            <h2>[Meteorite Adoption]</h2>
+            <h3>{{ meteorite.name }} -- {{ meteorite.id }}</h3>
+            <p>Price: <strong><span>£{{ meteorite.price }}</span></strong></p>
             <div id="saveAndBuy">
                 <button>Add into Basket</button>
                 <button>Buy</button>
             </div>
             <div id="markAndCompare">
-                <button>Set a Marked Meteorite</button>
+                <button>Set as Marked</button>
                 <button>Compare with Marked</button>
             </div>
         </div>
     </div>
+
+    {% if background_story %}
+        <div id="meteorite_story">
+            <h3>Background Story</h3>
+            <p>{{ background_story }}</p>
+        </div>
+    {% endif %}
+
+    <h3 style="margin-top:20px;">Meteorite Landing Site</h3>
+    <div id="map" style="height: 300px; width: 100%;"></div>
+
+    <div id="similar_meteorites">
+        <h3 style="margin-top:20px;">Similar Meteorites</h3>
+        <ul>
+            {% for similar in similar_meteorites %}
+                <li>
+                    <a href="{% url 'meteorite:meteorite_detail' similar.id %}">
+                        {{ similar.name }} [{{ similar.id }}]
+                    </a>
+                </li>
+            {% empty %}
+                <li>No similar meteorites found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map', {
+            center: [{{ meteorite.latitude }}, {{ meteorite.longitude }}],
+            zoom: 4,
+            minZoom: 2,
+            maxZoom: 10,
+            maxBounds: [
+                [-90, -180],
+                [90, 180]
+            ],
+            worldCopyJump: false
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        L.marker([{{ meteorite.latitude }}, {{ meteorite.longitude }}]).addTo(map)
+            .bindPopup('<b>{{ meteorite.name }}</b><br />Landing Site').openPopup();
+    </script>
 {% endblock %}

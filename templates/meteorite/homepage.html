@@ -5,9 +5,9 @@
     <!-- Here will show 5 or 10 random meteorite projects -->
     <div id="random_list">
         <h1>Recommendation of Today: </h1>
-        <ul>
+        <ul style="list-style-type:none;">
             {% for meteorite in random_meteorites %}
-                <li>
+                <li style="margin-bottom:5px;">
                     <a href="{% url 'meteorite:meteorite_detail' meteorite.id %}">
                         Name: {{ meteorite.name }} [ID: {{ meteorite.id }}] -- Mass: {{ meteorite.mass }}g, Year: {{ meteorite.year }}.
                     </a>
@@ -17,11 +17,28 @@
         <h1><a href="{% url 'meteorite:meteorite_list' %}">See all meteorites</a></h1>
     </div>
     <!-- Show some basic information about meteorite -->
-    <div id="basic_info">
+    <div id="basic_info" style="background-color:#E8E8E8; padding:5px;">
         <h1>Meteorites</h1>
         <p>A meteorite is an object which has fallen to Earth from space. Meteors are the flashes of light ('falling stars') produced when meteorites pass through Earth's atmosphere. Other, smaller, pieces of extraterrestrial debris also cause meteors, including grains of dust from comets. While some meteorites are found immediately after their fall, many, called 'finds', have lain on the Earth for many tens of thousands of years prior to their discovery.</p>
         <p>Meteorites are either stony, in which case they are only slightly heavier than a typical terrestrial rock of the same size, or they are metallic, in which case they are much heavier and ring like a bell when struck with a metallic object. Meteorites that have fallen recently have a distinctive black coating called fusion crust that looks glassy and smooth. Older meteorites are typically weathered and seem to be covered with a fairly smooth dark brown coating. Most meteorites are magnetic, some strongly, some weakly. If a corner is broken off and polished, most meteorites will contain numerous small flecks of metal.</p>
         <p>Contrary to the image sometimes given to them in movies and fiction, meteorites are generally no more radioactive than typical terrestrial rocks, and they do not glow or feel unusually warm to the touch. They are not poisonous and thus there is no danger in touching or even ingesting a piece of meteorite (the latter not, however, being recommended). While some cultures have made meteorites a focus of worship (A few are still housed in temples in Japan and Asia), there is no evidence that they give their possessors any superhuman powers.</p>
         <p>To find more information about meteorites, you can go to <a href="https://meteoritical.org/">The Meteoritical Society</a>. </p>
+        <h1>Meteorite Adoption</h1>
+        <p>Meteorite adoption allows individuals to symbolically connect with real meteorites. Adopters usually receive a certificate and detailed information, but not the physical meteorite itself.</p>
+        <h2>Why Adopt a Meteorite?</h2>
+        <ul>
+            <li><strong>Science Education:</strong> Inspire interest in astronomy and geology.</li>
+            <li><strong>Memorable Gifts:</strong> Perfect for birthdays, anniversaries, and graduations.</li>
+            <li><strong>Cultural Symbol:</strong> Meteorites, originating from space, symbolize mystery and exploration.</li>
+            <li><strong>Support for Public Projects:</strong> Contributions often aid scientific research or museums.</li>
+        </ul>
+        <h2>What You Receive</h2>
+        <ul>
+            <li>Official adoption certificate</li>
+            <li>Detailed meteorite profile (name, fall year, location, type, etc.)</li>
+            <li>Optional listing of your name on the public adoption register</li>
+        </ul>
+
+        <p>Adopt your piece of the universe and be part of cosmic history!</p>
     </div>
 {% endblock %}
