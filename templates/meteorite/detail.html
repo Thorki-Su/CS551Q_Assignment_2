@@ -1,0 +1,15 @@
+{% extends 'meteorite/main.html' %}
+{% block title %}
+    Meteorite-{{ meteorite.id }}
+{% endblock %}
+<!-- This is the detail page. All information about the meteorite will be shown. -->
+{% block content %}
+    <p>Name: {{ meteorite.name }}</p>
+    <p>Id: {{ meteorite.id }}</p>
+    <p>Type: {{ meteorite.nametype }}, {{ meteorite.recclass }}, {{ meteorite.fall }}</p>
+    <p>Mass: {{ meteorite.mass }}g</p>
+    <p>Year: {{ meteorite.year }}</p>
+    <p>Location: ({{ meteorite.latitude }}, {{ meteorite.longitude }})</p>
+    <!-- Here will be a little map to show the location. -->
+    <p>Price: {{ meteorite.price }}£</p>
+{% endblock %}

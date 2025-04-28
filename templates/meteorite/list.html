@@ -1,0 +1,15 @@
+{% extends 'meteorite/main.html' %}
+{% block title %}Meteorite List{% endblock %}
+<!-- This is the list page. All meteorites will be shown. And user can search any or use the filter and sorter. -->
+{% block content %}
+    <h3>Meteorite List</h3>
+        <ul>
+            {% for meteorite in meteorites %}
+                <li class="list_item">
+                    <a href="{% url 'meteorite:meteorite_detail' meteorite.id %}">
+                        {{ meteorite.name }} [{{ meteorite.id }}]
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+{% endblock %}

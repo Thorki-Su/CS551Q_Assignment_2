@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <title>{% block title %}default title{% endblock %}</title>
+    <!-- <link rel="stylesheet" href="{% static 'styles.css' %}"> -->
+    <!-- the past style are moved into style.css -->
+    {% block extra_head %}{% endblock %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        nav {
+            background-color: #444;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Meteorite Adoption Platform</h1>
+    </header>
+    <nav>
+        <a href="{% url 'meteorite:homepage' %}">Homepage</a>
+        <a href="{% url 'meteorite:meteorite_list' %}">List of meteorites</a>
+        <a href="#">User Registration</a>
+        <a href="#">Contact Us</a>
+    </nav>
+
+    <div class="content">
+        {% block content %}
+            <p>default content</p>
+        {% endblock %}
+    </div>
+</body>
+</html>
