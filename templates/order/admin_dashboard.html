@@ -1,0 +1,28 @@
+{% extends 'meteorite/main.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Admin Dashboard</h1>
+    
+    <h2>All Registered Users</h2>
+    <ul>
+        {% for user in users %}
+            <li>{{ user.username }} ({{ user.email }})</li>
+        {% endfor %}
+    </ul>
+
+    <h2>All Orders</h2>
+    <ul>
+        {% for order in orders %}
+            <li>
+                Order ID: {{ order.id }} | User: {{ order.user.username }} | Price: £{{ order.price }} | Date: {{ order.date }}
+                <ul>
+                    {% for item in order.items.all %}
+                        <li>{{ item.meteorite.name }} - £{{ item.price }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

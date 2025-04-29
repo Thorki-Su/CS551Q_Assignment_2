@@ -16,13 +16,13 @@
         </select>
 
         <select name="fall">
-            <option value="">All</option>
+            <option value="">All Fall Types</option>
             <option value="Fell" {% if request.GET.fall == "Fell" %}selected{% endif %}>Fell</option>
             <option value="Found" {% if request.GET.fall == "Found" %}selected{% endif %}>Found</option>
         </select>
 
         <select name="nametype">
-            <option value="">All Name Types</option>
+            <option value="">All Preservation</option>
             <option value="Valid" {% if request.GET.nametype == "Valid" %}selected{% endif %}>Valid</option>
             <option value="Relict" {% if request.GET.nametype == "Relict" %}selected{% endif %}>Relict</option>
         </select>

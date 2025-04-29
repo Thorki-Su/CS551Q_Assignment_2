@@ -15,8 +15,19 @@
     <nav>
         <a href="{% url 'meteorite:homepage' %}">Homepage</a>
         <a href="{% url 'meteorite:meteorite_list' %}">List of meteorites</a>
-        <a href="#">User Registration</a>
-        <a href="#">Contact Us</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'user:profile' %}">Personal Center</a>
+        {% else %}
+            <a href="{% url 'user:login' %}">Log-in</a>
+        {% endif %}
+        {% if user.is_authenticated %}
+            {% if user.is_staff %}
+                <a href="{% url 'admin_dashboard' %}">Admin Dashboard</a>
+            {% else %}
+                <a href="{% url 'order:view_cart' %}">My Cart</a>
+                <a href="{% url 'order:my_orders' %}">My Orders</a>
+            {% endif %}
+        {% endif %}
     </nav>
     <div class="main">
         <div class="content">
@@ -25,5 +36,14 @@
             {% endblock %}
         </div>
     </div>
+
+    {% if messages %}
+        <script>
+            {% for message in messages %}
+                alert("{{ message|escapejs }}");
+            {% endfor %}
+        </script>
+    {% endif %}
+
 </body>
 </html>

@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Meteorite
 import random
 from django.core.paginator import Paginator
 from faker import Faker
+from django.contrib import messages
 
 fake = Faker()
 
@@ -118,3 +119,29 @@ def generate_meteorite_story(meteorite):
             f"A {job} named {name} found it, and then sent it to laboratory."
         )
     return story
+
+def set_marked(request, meteorite_id):
+    request.session['marked_id'] = meteorite_id
+    return redirect('meteorite:meteorite_detail', meteorite_id=meteorite_id)
+
+def compare_with_marked(request, meteorite_id):
+    marked_id = request.session.get('marked_id')
+    if not marked_id:
+        messages.warning(request, "No meteorite has been marked for comparison.")
+        return redirect('meteorite:meteorite_detail', meteorite_id=meteorite_id)
+    
+    if marked_id == meteorite_id:
+        messages.info(request, "You're comparing the same meteorite.")
+        return redirect('meteorite:meteorite_detail', meteorite_id=meteorite_id)
+
+    return redirect('meteorite:compare', id1=marked_id, id2=meteorite_id)
+
+def compare(request, id1, id2):
+    m1 = get_object_or_404(Meteorite, id=id1)
+    m2 = get_object_or_404(Meteorite, id=id2)
+    return render(request, 'meteorite/compare.html', {'m1': m1, 'm2': m2})
+
+def clear_marked(request):
+    if 'marked_id' in request.session:
+        del request.session['marked_id']
+    return redirect('meteorite:meteorite_list')

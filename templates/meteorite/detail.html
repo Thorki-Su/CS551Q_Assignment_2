@@ -23,12 +23,22 @@
             <h3>{{ meteorite.name }} -- {{ meteorite.id }}</h3>
             <p>Price: <strong><span>£{{ meteorite.price }}</span></strong></p>
             <div id="saveAndBuy">
-                <button>Add into Basket</button>
-                <button>Buy</button>
+                <form action="{% url 'order:add_to_cart' meteorite.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Add into Basket</button>
+                </form>
+                <form method="post" action="{% url 'order:buy_now' meteorite.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Buy Now</button>
+                </form>
             </div>
             <div id="markAndCompare">
-                <button>Set as Marked</button>
-                <button>Compare with Marked</button>
+                <a href="{% url 'meteorite:set_marked' meteorite.id %}">
+                    <button>Set as Marked</button>
+                </a>
+                <a href="{% url 'meteorite:compare_with_marked' meteorite.id %}">
+                    <button>Compare with Marked</button>
+                </a>
             </div>
         </div>
     </div>

@@ -1,0 +1,15 @@
+{% extends 'meteorite/main.html' %}
+
+{% block title %}Your Profile{% endblock %}
+
+{% block content %}
+    <div style="background-color:#e0e0e0; padding:5px;">
+        <h2>Welcome, {{ user.username }}!</h2>
+        <p>Email: {{ user.email }}</p>
+        <p>User Type: {{ user.usertype }}</p>
+        <p>Registered at: {{ user.reg_time }}</p>
+
+        <a href="{% url 'user:logout' %}"><button>Logout</button></a>
+    </div>
+    <a href="{% url 'order:my_orders' %}">See All Orders</a>
+{% endblock %}
