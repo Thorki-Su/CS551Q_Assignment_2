@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+        
+header {
+    background-color: #191d42;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+        
+nav {
+    background-color: #425b70;
+    text-align: center;
+    padding: 10px;
+}
+        
+nav a {
+    color: white;
+    margin: 0 15px;
+    
+}
+
+a {
+    text-decoration: none;
+}
+        
+a:hover {
+    text-decoration: underline;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    max-width: 80%;
+}
+
+#detailPage {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+#meteorite_info {
+    width: 40vw;
+    background-color:#e0e0e0;
+}
+
+#meteorite_info p{
+    padding-left: 10px;
+}
+
+#buying_info {
+    width: 40vw;
+    text-align: center;
+}
+
+#title_price {
+    padding-left: 10px;
+}
+
+#buying_info button {
+    width: 160px;
+    background-color: #4682B4;
+    color: white;
+    padding: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
