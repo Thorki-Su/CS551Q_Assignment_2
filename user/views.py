@@ -12,7 +12,9 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('meteorite:homepage')  # Jump to homepage after successful registration
+            return redirect('meteorite:homepage')  # Jump to login after successful registration
+        else:
+            print(form.errors)
     else:
         form = UserRegistrationForm()
     return render(request, 'user/register.html', {'form': form})

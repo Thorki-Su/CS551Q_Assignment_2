@@ -125,21 +125,29 @@ def set_marked(request, meteorite_id):
     return redirect('meteorite:meteorite_detail', meteorite_id=meteorite_id)
 
 def compare_with_marked(request, meteorite_id):
+    meteorite = get_object_or_404(Meteorite, id=meteorite_id)
     marked_id = request.session.get('marked_id')
     if not marked_id:
         messages.warning(request, "No meteorite has been marked for comparison.")
         return redirect('meteorite:meteorite_detail', meteorite_id=meteorite_id)
-    
     if marked_id == meteorite_id:
         messages.info(request, "You're comparing the same meteorite.")
         return redirect('meteorite:meteorite_detail', meteorite_id=meteorite_id)
-
-    return redirect('meteorite:compare', id1=marked_id, id2=meteorite_id)
+    marked_meteorite = get_object_or_404(Meteorite, id=marked_id)
+    print(f"Comparing: {marked_meteorite.name} vs {meteorite.name} one")
+    return render(request, 'meteorite/compare.html', {
+        'meteorite1': marked_meteorite,
+        'meteorite2': meteorite
+    })
 
 def compare(request, id1, id2):
-    m1 = get_object_or_404(Meteorite, id=id1)
-    m2 = get_object_or_404(Meteorite, id=id2)
-    return render(request, 'meteorite/compare.html', {'m1': m1, 'm2': m2})
+    meteorite1 = get_object_or_404(Meteorite, id=id1)
+    meteorite2 = get_object_or_404(Meteorite, id=id2)
+    print(f"Comparing: {meteorite1.name} vs {meteorite2.name} two")
+    return render(request, 'meteorite/compare.html', {
+        'meteorite1': meteorite1,
+        'meteorite2': meteorite2
+    })
 
 def clear_marked(request):
     if 'marked_id' in request.session:

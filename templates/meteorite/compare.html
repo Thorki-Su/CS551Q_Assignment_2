@@ -1,19 +1,72 @@
 {% extends 'meteorite/main.html' %}
+
 {% block title %}Compare Meteorites{% endblock %}
+
 {% block content %}
     <h2>Compare Meteorites</h2>
-    <table border="1">
-        <tr><th>Field</th><th>{{ m1.name }}</th><th>{{ m2.name }}</th></tr>
-        <tr><td>ID</td><td>{{ m1.id }}</td><td>{{ m2.id }}</td></tr>
-        <tr><td>Type</td><td>{{ m1.nametype }}</td><td>{{ m2.nametype }}</td></tr>
-        <tr><td>Fall</td><td>{{ m1.fall }}</td><td>{{ m2.fall }}</td></tr>
-        <tr><td>Recclass</td><td>{{ m1.recclass }}</td><td>{{ m2.recclass }}</td></tr>
-        <tr><td>Mass</td><td>{{ m1.mass }}g</td><td>{{ m2.mass }}g</td></tr>
-        <tr><td>Year</td><td>{{ m1.year }}</td><td>{{ m2.year }}</td></tr>
-        <tr><td>Location</td><td>({{ m1.latitude }}, {{ m1.longitude }})</td><td>({{ m2.latitude }}, {{ m2.longitude }})</td></tr>
-        <tr><td>Price</td><td>£{{ m1.price }}</td><td>£{{ m2.price }}</td></tr>
-    </table>
-    <a href="{% url 'meteorite:clear_marked' %}">
-        <button style="margin-top:10px;">Clear Marked</button>
-    </a>
+    {% if meteorite1 and meteorite2 %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>{{ meteorite1.name }}</th>
+                    <th>{{ meteorite2.name }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ID</td>
+                    <td>{{ meteorite1.id }}</td>
+                    <td>{{ meteorite2.id }}</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{ meteorite1.name }}</td>
+                    <td>{{ meteorite2.name }}</td>
+                </tr>
+                <tr>
+                    <td>Name Type</td>
+                    <td>{{ meteorite1.nametype }}</td>
+                    <td>{{ meteorite2.nametype }}</td>
+                </tr>
+                <tr>
+                    <td>Rec Class</td>
+                    <td>{{ meteorite1.recclass }}</td>
+                    <td>{{ meteorite2.recclass }}</td>
+                </tr>
+                <tr>
+                    <td>Mass (g)</td>
+                    <td>{{ meteorite1.mass }}</td>
+                    <td>{{ meteorite2.mass }}</td>
+                </tr>
+                <tr>
+                    <td>Fall</td>
+                    <td>{{ meteorite1.fall }}</td>
+                    <td>{{ meteorite2.fall }}</td>
+                </tr>
+                <tr>
+                    <td>Year</td>
+                    <td>{{ meteorite1.year }}</td>
+                    <td>{{ meteorite2.year }}</td>
+                </tr>
+                <tr>
+                    <td>Latitude</td>
+                    <td>{{ meteorite1.latitude }}</td>
+                    <td>{{ meteorite2.latitude }}</td>
+                </tr>
+                <tr>
+                    <td>Longitude</td>
+                    <td>{{ meteorite1.longitude }}</td>
+                    <td>{{ meteorite2.longitude }}</td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td>{{ meteorite1.price }}</td>
+                    <td>{{ meteorite2.price }}</td>
+                </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <p>No meteorites available for comparison.</p>
+    {% endif %}
 {% endblock %}
