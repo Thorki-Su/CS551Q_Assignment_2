@@ -35,7 +35,7 @@ SECRET_KEY = 'django-insecure-%-*hhkkr=_(=b2jm0slwx6+hq9z5z!%vjav1701yx+m#oyhfmc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['sundaycinema-ericregard-8000.codio-box.uk', '*']
+ALLOWED_HOSTS = ['sundaycinema-ericregard-8000.codio-box.uk', 'thorki-as3-f2b03f78f236.herokuapp.com']
 
 
 # Application definition
