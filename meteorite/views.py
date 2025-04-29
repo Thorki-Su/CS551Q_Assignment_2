@@ -134,7 +134,6 @@ def compare_with_marked(request, meteorite_id):
         messages.info(request, "You're comparing the same meteorite.")
         return redirect('meteorite:meteorite_detail', meteorite_id=meteorite_id)
     marked_meteorite = get_object_or_404(Meteorite, id=marked_id)
-    print(f"Comparing: {marked_meteorite.name} vs {meteorite.name} one")
     return render(request, 'meteorite/compare.html', {
         'meteorite1': marked_meteorite,
         'meteorite2': meteorite
@@ -143,7 +142,6 @@ def compare_with_marked(request, meteorite_id):
 def compare(request, id1, id2):
     meteorite1 = get_object_or_404(Meteorite, id=id1)
     meteorite2 = get_object_or_404(Meteorite, id=id2)
-    print(f"Comparing: {meteorite1.name} vs {meteorite2.name} two")
     return render(request, 'meteorite/compare.html', {
         'meteorite1': meteorite1,
         'meteorite2': meteorite2

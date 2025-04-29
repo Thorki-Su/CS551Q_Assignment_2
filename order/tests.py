@@ -23,7 +23,6 @@ class OrderModuleTest(TestCase):
         self.buy_now_url = reverse('order:buy_now', args=[self.meteorite.id])
 
     def test_add_to_cart(self):
-        """测试添加商品到购物车"""
         response = self.client.post(self.add_to_cart_url)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, self.view_cart_url)
@@ -31,23 +30,20 @@ class OrderModuleTest(TestCase):
         self.assertEqual(cart_item.price, self.meteorite.price)
 
     def test_add_to_cart_duplicate(self):
-        """测试重复添加商品到购物车"""
         CartItem.objects.create(cart=self.cart, meteorite=self.meteorite, price=self.meteorite.price)
         response = self.client.post(self.add_to_cart_url)
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(self.cart.items.count(), 1)  # 不应重复添加
+        self.assertEqual(self.cart.items.count(), 1)
 
     def test_view_cart(self):
-        """测试查看购物车内容"""
         CartItem.objects.create(cart=self.cart, meteorite=self.meteorite, price=self.meteorite.price)
         response = self.client.get(self.view_cart_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'order/cart.html')
         self.assertContains(response, 'Test Meteorite')
-        self.assertContains(response, '100.00')  # 检查总价
+        self.assertContains(response, '100.00')
 
     def test_checkout_success(self):
-        """测试结账成功"""
         CartItem.objects.create(cart=self.cart, meteorite=self.meteorite, price=self.meteorite.price)
         response = self.client.post(self.checkout_url)
         self.assertEqual(response.status_code, 302)
@@ -60,7 +56,6 @@ class OrderModuleTest(TestCase):
         self.assertEqual(str(messages[0]), f"Order placed successfully! Order ID: {order.id}")
 
     def test_checkout_empty_cart(self):
-        """测试空购物车结账"""
         response = self.client.post(self.checkout_url)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, self.view_cart_url)
@@ -69,7 +64,6 @@ class OrderModuleTest(TestCase):
         self.assertFalse(Order.objects.filter(user=self.user).exists())
 
     def test_buy_now_success(self):
-        """测试立即购买"""
         response = self.client.post(self.buy_now_url)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, self.my_orders_url)
@@ -81,7 +75,6 @@ class OrderModuleTest(TestCase):
         self.assertEqual(str(messages[0]), f"You have successfully purchased {self.meteorite.name}.")
 
     def test_my_orders(self):
-        """测试查看我的订单"""
         Order.objects.create(user=self.user, price=100.00)
         response = self.client.get(self.my_orders_url)
         self.assertEqual(response.status_code, 200)
