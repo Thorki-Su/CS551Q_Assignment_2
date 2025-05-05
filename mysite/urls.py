@@ -27,3 +27,6 @@ urlpatterns = [
     path('order/', include('order.urls')),
     path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
 ]
+
+handler404 = 'mysite.views.custom_404_view'
+handler500 = 'mysite.views.custom_500_view'
