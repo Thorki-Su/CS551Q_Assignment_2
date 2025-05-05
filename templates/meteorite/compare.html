@@ -66,6 +66,9 @@
                 </tr>
             </tbody>
         </table>
+        <a href="{% url 'meteorite:clear_marked' %}">
+            <button style="margin-top:10px;">Clear Marked</button>
+        </a>
     {% else %}
         <p>No meteorites available for comparison.</p>
     {% endif %}
