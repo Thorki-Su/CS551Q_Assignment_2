@@ -2,7 +2,7 @@
 {% block title %}Meteorite List{% endblock %}
 <!-- This is the list page. All meteorites will be shown. And user can search any or use the filter and sorter. -->
 {% block content %}
-    <form method="get" action="" style="margin-top:10px;">
+    <form method="get" action="" style="margin-top:20px;">
         <input type="text" name="search" placeholder="Search by name" value="{{ search_query }}">
 
         <select name="sort">
@@ -43,15 +43,15 @@
         <button type="submit">Apply</button>
     </form>
     <h3>Meteorite List</h3>
-    <ul>
+    <ol>
         {% for meteorite in page_obj %}
             <li class="list_item">
-                <a href="{% url 'meteorite:meteorite_detail' meteorite.id %}">
+                <a href="{% url 'meteorite:meteorite_detail' meteorite.id %}" style="color:brown;">
                     {{ meteorite.name }} [{{ meteorite.id }}]
                 </a>
             </li>
         {% endfor %}
-    </ul>
+    </ol>
 
     <div class="pagination">
         {% if page_obj.has_previous %}

@@ -5,16 +5,16 @@
     <!-- Here will show 5 or 10 random meteorite projects -->
     <div id="random_list">
         <h1>Recommendation of Today: </h1>
-        <ul style="list-style-type:none;">
+        <ul>
             {% for meteorite in random_meteorites %}
-                <li style="margin-bottom:5px;">
-                    <a href="{% url 'meteorite:meteorite_detail' meteorite.id %}">
+                <li style="margin-bottom:10px;">
+                    <a href="{% url 'meteorite:meteorite_detail' meteorite.id %}" style="color:black;">
                         Name: {{ meteorite.name }} [ID: {{ meteorite.id }}] -- Mass: {{ meteorite.mass }}g, Year: {{ meteorite.year }}.
                     </a>
                 </li>
             {% endfor %}
         </ul>
-        <h1><a href="{% url 'meteorite:meteorite_list' %}">See all meteorites</a></h1>
+        <h1><a href="{% url 'meteorite:meteorite_list' %}">See all meteorites!</a></h1>
     </div>
     <!-- Show some basic information about meteorite -->
     <div id="basic_info" style="background-color:#E8E8E8; padding:5px;">
