@@ -1,16 +1,16 @@
-# CS551Q Assignment 2
+# CS551Q Assignment 3
 
 ### What is this?
-This `README.md` will show the files about CS551Q Assignment 2.
+This `README.md` will show the files about CS551Q Assignment 3.
 
 ### Use of <script> in Templates
 The only JavaScript in this assignment is <script> in html templates for dealing with maps.
 
 # How to run (with pythonanywhere)
-Please visit this url to get to the homepage: https://peiheng.pythonanywhere.com/
-Ordinary Account [username: testman, password: test123456!]
-Admin Account [username: codio, password: codio]
-With admin account you can see all the users and orders.
+Please visit this url to get to the homepage: https://peiheng.pythonanywhere.com/  
+Ordinary Account [username: testman, password: test123456!]  
+Admin Account [username: codio, password: codio]  
+With admin account you can see all the users and orders.  
 
 # How to run through codio (local version)
 Use this command:
@@ -20,7 +20,7 @@ python3 manage.py runserver 0.0.0.0:8000
 ```
 Then visit this url to get to our homepage: https://sundaycinema-ericregard-8000.codio-box.uk/meteorite/
 
-# Solutions for some questions:
+# Solutions for some common questions:
 ### Get python version 3.10.7
 When open your codio link for this Assignment, firstly checking the python version is necessary. Try with this code:
 ```bash 
@@ -49,13 +49,11 @@ pyenv rehash
 ```
 
 ### Download files from github repository
-I have created a repository on github for this Assignment, you can download files from it.
-Firstly, make sure you've received my invitation and selected consent. Only if you do this will you have the permission to follow up.
-Then, you can use this commend to download.
+I have created a repository on github for this Assignment, you can download files from it. You can use this commend to download.
 ```bash
 git clone https://github.com/Thorki-Su/CS551Q_Assignment_1.git
 ```
-This will download all the files into your codio as a new folder '*CS551Q_Assignment_1*'. To make edits and commits easier, please move all files out of the folder.
+This will download all the files into your codio as a new folder '*CS551Q_Assignment_3*'. To make edits and commits easier, please move all files out of the folder.
 
 ### Get sqlite version 3.49.1
 Please use this command to check your sqlite version:
@@ -83,17 +81,17 @@ All templates and their usage will be listed here:
 'homepage.html' for the home page of this software.  
 'list.html' for the products list page.  
 'detail.html' for the product detail page.  
-'compare.html' for the compare page.
-'cart.html' for the cart page.  
-'my_orders.html' for the order history page.
+'compare.html' for the compare page.  
+'cart.html' for the cart page.   
+'my_orders.html' for the order history page.  
 'admin_dashboard.html' for the admin page.  
 'login.html' for the log-in page.  
 'profile.html' for the user profile page.  
-'register.html' for the user register page.
+'register.html' for the user register page.  
 
 # Data sources
 The meteorite data I used comes from https://www.kaggle.com/datasets/nasa/meteorite-landings/data. You can find the excel file in 'meteorite/meteorite_data/meteorites'.
-The map feature uses open source data and tools. The open source data: https://github.com/datasets/geo-countries. The open source tool: https://leafletjs.com/.
+The open source map tool: https://leafletjs.com/.
 
 # The name in git-log
 Thorki Su is the username of Peiheng Su in github.
