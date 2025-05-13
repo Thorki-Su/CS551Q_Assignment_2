@@ -10,7 +10,7 @@ The only JavaScript in this assignment is <script> in html templates for dealing
 Please visit this url to get to the homepage: https://peiheng.pythonanywhere.com/  
 Ordinary Account [username: testman, password: test123456!]  
 Admin Account [username: codio, password: codio]  
-With admin account you can see all the users and orders.  
+With admin account you can see all the users and orders. Also you can go to the admin control page.  
 
 # How to run through codio (local version)
 Use this command:
