@@ -5,13 +5,14 @@
 {% block content %}
     <div style="padding:5px;">
         <h2>Welcome, {{ user.username }}!</h2>
-        <p>Email: {{ user.email }}</p>
-        <p>User Type: {{ user.usertype }}</p>
-        <p>Registered at: {{ user.reg_time }}</p>
+        <p><strong>Email:</strong></p>
+        <p>{{ user.email }}</p>
+        <p><strong>Registered at:</strong></p>
+        <p>{{ user.reg_time }}</p>
 
         <a href="{% url 'user:logout' %}"><button>Logout</button></a>
     </div>
     <div style="padding:20px;">
-        <a href="{% url 'order:my_orders' %}">See All Orders</a>
+        <a href="{% url 'order:my_orders' %}">See All Your Orders</a>
     </div>
 {% endblock %}

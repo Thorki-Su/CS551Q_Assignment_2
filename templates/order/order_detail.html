@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order {{ order.id }}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f5f5f5;
+            padding: 40px;
+        }
+
+        .certificate {
+            background: white;
+            max-width: 800px;
+            margin: auto;
+            padding: 50px;
+            border: 10px solid #2c3e50;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .certificate h1 {
+            font-size: 40px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .certificate h2 {
+            font-size: 24px;
+            color: #34495e;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+        .certificate p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 15px 0;
+            color: #2d2d2d;
+        }
+
+        .certificate ul {
+            list-style-type: square;
+            padding-left: 20px;
+            text-align: left;
+            display: inline-block;
+            margin: 20px 0;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+
+        .certificate li {
+            margin-bottom: 8px;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+
+        .download-btn {
+            margin-top: 30px;
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background-color: #1a252f;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'order:my_orders' %}">Go Back</a>
+    <div class="certificate" id="certificate">
+        <h1>Certificate of Adoption</h1>
+        <h2>This is to certify that</h2>
+
+        <p>Dear user <strong>{{ order.user }}</strong>,</p>
+
+        <p>You have successfully completed this adoption on <strong>{{ order.date|date:"Y-m-d" }}</strong>.</p>
+
+        <p>The meteorite(s) you adopted:</p>
+        <ul>
+            {% for item in order.items.all %}
+                <li>{{ item.meteorite.name }}</li>
+            {% endfor %}
+        </ul>
+
+        <p>Thank you for adopting this meteorite! Your support helps keep our platform running and contributes directly to scientific research and classification of meteorites.</p>
+
+        <p>We pledge to use all adoption fees for further geological analysis, sample preservation, and public education. May this messenger from space bring you joy and a sense of cosmic wonder!</p>
+
+        <p class="footer-note">— Meteorite Adoption Program</p>
+    </div>
+
+    <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
+
+    <script>
+        function downloadPDF() {
+            const element = document.getElementById('certificate');
+            html2pdf()
+                .set({
+                    margin: 10,
+                    filename: 'Certificate_Order_{{ order.id }}.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                })
+                .from(element)
+                .save();
+        }
+    </script>
+</body>
+</html>

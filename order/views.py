@@ -84,3 +84,8 @@ def buy_now(request, meteorite_id):
 
     messages.success(request, f'You have successfully purchased {meteorite.name}.')
     return redirect('order:my_orders')
+
+@login_required
+def order_detail(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    return render(request,'order/order_detail.html', {'order': order})
